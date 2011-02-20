@@ -81,4 +81,14 @@ class InterfaceTest < Test::Unit::TestCase
     assert !@broken_device.new.on?
     assert !@device.new.on?
   end
-end
+  def test_bad_classes_on_interface_no_register
+	msg = "Register classes not on. Call register classes on Interface::Abstract"
+	assert_raises(RuntimeError, msg) { @remote.bad_classes }
+	assert_raises(RuntimeError, msg) { @mock_interface.bad_classes }
+  end
+  def test_all_bad_classes_no_register
+    msg = "Register classes not on. Call register classes on Interface::Abstract"
+	assert_raises(RuntimeError, msg) { Interface::Abstract.bad_interfaces }
+	assert_raises(RuntimeError, msg) { @mock_interface.bad_classes }
+  end
+end 
